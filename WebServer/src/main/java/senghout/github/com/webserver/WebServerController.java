@@ -22,9 +22,9 @@ public class WebServerController {
     @RequestMapping(value = "/", headers = "Accept=application/json")
     public String homepage() {
         // Calls the atomizer endpoint that we want to connect to
-        return atomizerService.homepage();
+        // TODO implement an actual value from the mapping request
+        return atomizerService.visitUrl("000gUYq5");
     }
-
 
     @RequestMapping(value = "/range", headers = "Accept=application/json")
     public String nextRange() {

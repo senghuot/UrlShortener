@@ -22,11 +22,10 @@ public class WebAtomizerService {
         this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl : "http://" + serviceUrl;
     }
 
-    public String homepage() {
+    public String visitUrl(String tinyUrl) {
         return "Hello there. You're talking to " + restTemplate.getForObject(
-                serviceUrl + "/find/000gUYq5",
+                serviceUrl + "/find/" + tinyUrl,
                 String.class
         );
     }
-
 }
