@@ -4,5 +4,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import senghout.github.com.atomizer.model.TinyUrl;
 
 public interface TinyUrlRepo extends MongoRepository<TinyUrl, String> {
-    public TinyUrl findByTinyUrl(final String tinyUrl);
+    TinyUrl findByTinyUrl(final String tinyUrl);
 }
