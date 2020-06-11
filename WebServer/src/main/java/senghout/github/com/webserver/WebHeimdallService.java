@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableDiscoveryClient
-public class WebAtomizerService {
+public class WebHeimdallService {
 
     @Autowired
     @LoadBalanced
@@ -18,15 +18,14 @@ public class WebAtomizerService {
 
     protected String serviceUrl;
 
-    public WebAtomizerService(String serviceUrl) {
+    public WebHeimdallService(String serviceUrl) {
         this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl : "http://" + serviceUrl;
     }
 
-    public String homepage() {
-        return "Hello there. You're talking to " + restTemplate.getForObject(
-                serviceUrl + "/find/000gUYq5",
+    public String nextRange() {
+        return restTemplate.getForObject(
+                serviceUrl + "/",
                 String.class
         );
     }
-
 }

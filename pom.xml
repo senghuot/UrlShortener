@@ -10,6 +10,7 @@
 
 	<modules>
 		<module>Atomizer</module>
+		<module>Heimdall</module>
 		<module>Registration</module>
 		<module>WebServer</module>
 	</modules>

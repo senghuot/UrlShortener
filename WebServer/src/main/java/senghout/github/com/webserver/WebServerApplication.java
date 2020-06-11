@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
+// Bean is for dependency injections, this is the config file
 @SpringBootApplication
 @EnableDiscoveryClient
 @ComponentScan(useDefaultFilters = false)
@@ -25,11 +26,17 @@ public class WebServerApplication {
 
 	@Bean
 	public WebAtomizerService atomizerService() {
-		return new WebAtomizerService("Atomizer");
+		return new WebAtomizerService("atomizer");
 	}
 
 	@Bean
-	public WebAtomizerController atomizerController() {
-		return new WebAtomizerController(atomizerService());
+	public WebHeimdallService heimdallService() {
+		return new WebHeimdallService("heimdall");
+	}
+
+	@Bean
+	// injects the dependencies we want into the WebServerController constructor
+	public WebServerController webServerController() {
+		return new WebServerController(atomizerService(), heimdallService());
 	}
 }
