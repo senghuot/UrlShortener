@@ -1,6 +1,4 @@
-package senghout.github.com.atomizer.model;
-
-import org.springframework.data.annotation.Id;
+package senghout.github.com.webserver;
 
 public class Zoo {
     public String Id;

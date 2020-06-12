@@ -22,10 +22,12 @@ public class WebHeimdallService {
         this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl : "http://" + serviceUrl;
     }
 
-    public String nextRange() {
-        return restTemplate.getForObject(
+    public Zoo nextRange() {
+        Zoo zoo = restTemplate.getForObject(
                 serviceUrl + "/",
-                String.class
+                Zoo.class
         );
+        System.out.println(zoo.toString());
+        return zoo;
     }
 }

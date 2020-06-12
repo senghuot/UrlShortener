@@ -27,7 +27,7 @@ public class WebServerController {
     }
 
     @RequestMapping(value = "/range", headers = "Accept=application/json")
-    public String nextRange() {
+    public Zoo nextRange() {
         // Calls the heimdallService that we used DI to create to make a request to the heimdallService
         // and return the next range back.
         return heimdallService.nextRange();
