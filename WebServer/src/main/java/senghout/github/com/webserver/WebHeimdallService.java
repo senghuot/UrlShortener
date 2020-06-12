@@ -23,11 +23,9 @@ public class WebHeimdallService {
     }
 
     public Zoo nextRange() {
-        Zoo zoo = restTemplate.getForObject(
+        return restTemplate.getForObject(
                 serviceUrl + "/",
                 Zoo.class
         );
-        System.out.println(zoo.toString());
-        return zoo;
     }
 }
