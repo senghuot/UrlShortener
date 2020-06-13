@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import senghout.github.com.atomizer.model.Zoo;
 import senghout.github.com.atomizer.repo.ZooRepo;
+import java.util.Random;
 
 @Component
 public class Heimdall {
@@ -23,5 +24,16 @@ public class Heimdall {
         newZoo.high += INCREMENT;
         repo.save(newZoo);
         return newZoo;
+    }
+
+    /**
+     * TODO: get random number to avoid conflicts of numbers as our count keeper always starts at 0
+     */
+    public Zoo getTestRange() {
+        int rand = new Random().nextInt(100000000);
+        Zoo zoo = new Zoo();
+        zoo.low = rand;
+        zoo.high = rand + INCREMENT;
+        return zoo;
     }
 }

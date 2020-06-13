@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import senghout.github.com.atomizer.model.AddRequest;
 import senghout.github.com.atomizer.model.TinyUrl;
 import senghout.github.com.atomizer.model.Zoo;
 import senghout.github.com.atomizer.repo.TinyUrlRepo;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 public class AtomizerController {
@@ -30,32 +33,34 @@ public class AtomizerController {
 
     @PostConstruct
     public void init() {
-        zoo = heimdall.getNextRange();
+        zoo = heimdall.getTestRange();
     }
 
     @GetMapping(value = "/find/{TinyUrl}")
-    public String getUrl(@PathVariable("TinyUrl")String tinyUrl) {
+    public void getUrl(@PathVariable("TinyUrl")String tinyUrl, HttpServletResponse response) throws IOException{
         TinyUrl url = repo.findByTinyUrl(tinyUrl);
-        return url == null ? "Invalid input exception" : url.fullUrl;
+
+        if (url == null) {
+            response.sendRedirect("/error");
+        }  else {
+            response.sendRedirect(url.fullUrl);
+        }
     }
 
     @PostMapping(value = "/add", consumes = {"application/json"})
-    public String addUrl(@RequestBody String fullUrl) {
+    public String addUrl(@RequestBody AddRequest addRequest) {
         final String tinyUrl = atomizerUtils.encodeNumber(zoo.low++);
-        final TinyUrl tiny = new TinyUrl(tinyUrl, fullUrl);
+        final TinyUrl tiny = new TinyUrl(tinyUrl, addRequest.fullUrl);
         repo.save(tiny);
 
         if (zoo.low == zoo.high) {
-            zoo = heimdall.getNextRange();
+            zoo = heimdall.getTestRange();
         }
         return tinyUrl;
     }
 
-    @GetMapping(value = "/visit")
-    public Zoo addUrl() {
-        Zoo zoo = restTemplate.getForObject(
-                "http://web-service/range",
-                Zoo.class);
-        return zoo;
+    @GetMapping(value = "/error")
+    public String error() {
+        return "Invalid url given";
     }
 }
