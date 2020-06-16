@@ -25,7 +25,7 @@
             <span class="button-label">Atomize</span>
         </button>
     </div>
-    <div id="result"></div>
+    <a href="www.amazon.com" id="result"></a>
 </div>
 </body>
 <script>
@@ -39,7 +39,8 @@
             xmlhttp.setRequestHeader("Content-type", "application/json");
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-                    document.getElementById("result").innerHTML = "Your link atomizer.com/" + xmlhttp.responseText;
+                    document.getElementById("result").innerHTML = "http://localhost:9999/" + xmlhttp.responseText;
+                    document.getElementById("result").href = "http://localhost:9999/" + xmlhttp.responseText;
                 }
             };
 

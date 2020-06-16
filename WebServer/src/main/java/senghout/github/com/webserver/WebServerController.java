@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @RestController
 public class WebServerController {
 
@@ -22,11 +26,19 @@ public class WebServerController {
         this.heimdallService = heimdallService;
     }
 
-    @RequestMapping(value = "/", headers = "Accept=application/json")
-    public String homepage() {
+//    @RequestMapping(value = "/", headers = "Accept=application/json")
+//    public String homepage() {
+//        // Calls the atomizer endpoint that we want to connect to
+//        // TODO implement an actual value from the mapping request
+//        return atomizerService.visitUrl("000gUYq5");
+//    }
+
+    @RequestMapping(value = "/find/{tinyUrl}", method = GET)
+    public void find(@PathVariable String tinyUrl, HttpServletResponse response) throws IOException {
         // Calls the atomizer endpoint that we want to connect to
         // TODO implement an actual value from the mapping request
-        return atomizerService.visitUrl("000gUYq5");
+         String fullUrl = atomizerService.visitUrl(tinyUrl);
+         response.sendRedirect(fullUrl);
     }
 
     @RequestMapping(value = "/range", headers = "Accept=application/json")
