@@ -1,0 +1,43 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.title-container {
+    text-align: center;
+}
+
+.container {
+    padding-top: 150px;
+}
+
+body {
+    margin:0 auto;
+}
+
+#result {
+    padding-top: 20px;
+}
+
+#submit-button {
+    height: 55px;
+    margin-bottom: 1px;
+    padding: 0 10px;
+}
+
+#input-url {
+    margin-top: -1px
+}
+
+.button-label {
+    font-size: 12px;
+}
