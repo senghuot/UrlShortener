@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import senghout.github.com.atomizer.model.AddUrlInput;
 import senghout.github.com.atomizer.model.TinyUrl;
 import senghout.github.com.atomizer.model.Zoo;
 import senghout.github.com.atomizer.repo.TinyUrlRepo;
@@ -40,9 +41,9 @@ public class AtomizerController {
     }
 
     @PostMapping(value = "/add", consumes = {"application/json"})
-    public String addUrl(@RequestBody String fullUrl) {
+    public String addUrl(@RequestBody AddUrlInput data) {
         final String tinyUrl = atomizerUtils.encodeNumber(zoo.low++);
-        final TinyUrl tiny = new TinyUrl(tinyUrl, fullUrl);
+        final TinyUrl tiny = new TinyUrl(tinyUrl, data.fullUrl);
         repo.save(tiny);
 
         if (zoo.low == zoo.high) {

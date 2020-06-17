@@ -30,14 +30,9 @@ public class WebServerApplication {
 	}
 
 	@Bean
-	public WebHeimdallService heimdallService() {
-		return new WebHeimdallService("heimdall");
-	}
-
-	@Bean
 	// injects the dependencies we want into the WebServerController constructor
 	public WebServerController webServerController() {
-		return new WebServerController(atomizerService(), heimdallService());
+		return new WebServerController(atomizerService());
 	}
 
 	@Bean

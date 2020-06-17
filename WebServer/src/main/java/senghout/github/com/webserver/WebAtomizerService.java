@@ -28,7 +28,7 @@ public class WebAtomizerService {
     }
 
     public String visitUrl(String tinyUrl) {
-        return "Hello there. You're talking to " + restTemplate.getForObject(
+        return restTemplate.getForObject(
                 serviceUrl + "/find/" + tinyUrl,
                 String.class
         );
