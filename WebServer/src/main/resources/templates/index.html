@@ -58,11 +58,11 @@
 
         function createLinkElement(tinyUrl) {
             let linkElement = document.createElement("a");
-            let link = location.hostname + "/find/" + tinyUrl;
-            linkElement.innerHTML = link;
+            let link = "find/" + tinyUrl;
+            linkElement.innerHTML = "http://localhost:9999/" + link;
             linkElement.href = link;
             return linkElement;
         }
 
-    </script>
+</script>
 </html>
