@@ -26,7 +26,7 @@ public class WebServerApplication {
 
 	@Bean
 	public WebAtomizerService atomizerService() {
-		return new WebAtomizerService("atomizer");
+		return new WebAtomizerService();
 	}
 
 	@Bean

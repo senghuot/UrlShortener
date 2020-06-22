@@ -59,14 +59,6 @@ public class AtomizerController {
         return tinyUrl;
     }
 
-//    @GetMapping(value = "/visit")
-//    public Zoo addUrl() {
-//        Zoo zoo = restTemplate.getForObject(
-//                "http://heimdall/",
-//                Zoo.class);
-//        return zoo;
-//    }
-
     private Zoo getNextRange() {
         Zoo zoo = restTemplate.getForObject(
                 "http://heimdall/",

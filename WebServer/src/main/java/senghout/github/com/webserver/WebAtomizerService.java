@@ -23,8 +23,8 @@ public class WebAtomizerService {
 
     protected String serviceUrl;
 
-    public WebAtomizerService(String serviceUrl) {
-        this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl : "http://" + serviceUrl;
+    public WebAtomizerService() {
+        this.serviceUrl = "http://atomizer";
     }
 
     public String visitUrl(String tinyUrl) {
