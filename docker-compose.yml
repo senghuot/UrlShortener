@@ -1,0 +1,36 @@
+version: '3'
+services:
+  registration-service:
+    image: registration-image
+    ports:
+      - "1111:1111"
+
+  atomizer-service:
+    image: atomizer-image
+    ports:
+      - "8888:8888"
+    depends_on:
+      - registration-service
+    command: ["./wait-for-it", "localhost:1111", "--", "java","-jar","/app.jar"]
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registration-service:1111/eureka
+
+  heimdall-service:
+    image: heimdall-image
+    ports:
+      - "4567:4567"
+    depends_on:
+      - registration-service
+    command: ["./wait-for-it", "localhost:1111", "--", "java","-jar","/app.jar"]
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registration-service:1111/eureka
+
+  webserver:
+    image: webserver-image
+    ports:
+      - "80:9999"
+    depends_on:
+      - registration-service
+    command: ["./wait-for-it", "localhost:1111", "--", "java","-jar","/app.jar"]
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://registration-service:1111/eureka
