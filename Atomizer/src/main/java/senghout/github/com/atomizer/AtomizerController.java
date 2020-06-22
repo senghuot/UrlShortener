@@ -11,7 +11,6 @@ import senghout.github.com.atomizer.repo.TinyUrlRepo;
 
 @RestController
 public class AtomizerController {
-
     private Zoo zoo;
 
     @Autowired
@@ -22,10 +21,6 @@ public class AtomizerController {
 
     @Autowired
     AtomizerUtils atomizerUtils;
-
-    @Autowired
-    @LoadBalanced
-    protected RestTemplate restTemplate;
 
     public AtomizerController(AtomizerUtils atomizerUtils, TinyUrlRepo repo, Heimdall heimdall) {
         this.atomizerUtils = atomizerUtils;
