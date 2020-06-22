@@ -22,16 +22,6 @@ public class WebServerController {
         this.atomizerService = atomizerService;
     }
 
-<<<<<<< HEAD
-//    @RequestMapping(value = "/", headers = "Accept=application/json")
-//    public String homepage() {
-//        // Calls the atomizer endpoint that we want to connect to
-//        // TODO implement an actual value from the mapping request
-//        return atomizerService.visitUrl("000gUYq5");
-//    }
-
-=======
->>>>>>> 48cec31f8435b135545030d3654f794a77bb3037
     @RequestMapping(value = "/find/{tinyUrl}", method = GET)
     public void find(@PathVariable String tinyUrl, HttpServletResponse response) throws IOException {
         // Calls the atomizer endpoint that we want to connect to
@@ -47,11 +37,8 @@ public class WebServerController {
         return res;
     }
 
-<<<<<<< HEAD
     @GetMapping("/index")
     public String index(Model model) {
         return "index";
     }
-=======
->>>>>>> 48cec31f8435b135545030d3654f794a77bb3037
 }
