@@ -1,7 +1,10 @@
 package senghout.github.com.webserver;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 // Bean is for dependency injections, this is the config file
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableCaching
 @ComponentScan(useDefaultFilters = false)
 public class WebServerApplication {
 

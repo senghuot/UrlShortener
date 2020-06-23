@@ -1,16 +1,24 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  security:
+    enabled: false
 spring:
   cache:
     cache-names:
-      - rate-limit-buckets
+      - buckets
     caffeine:
       spec: maximumSize=1,expireAfterAccess=3600s
 bucket4j:
   enabled: true
   filters:
-    - cache-name: rate-limit-buckets
+    - cache-name: buckets
       url: .*
       rate-limits:
-        bandwidths:
-          - capacity: 1
-            time: 300
-            unit: seconds
+        - bandwidths:
+            - capacity: 1
+              time: 30
+              unit: seconds
+debug: true
