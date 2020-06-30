@@ -1,6 +1,12 @@
+FROM maven:3.6.0-jdk-8 as MAVEN_BUILD
+
+# Add dependencies and src
+COPY pom.xml .
+COPY src src/
+RUN mvn package
+
+# Run application
 FROM openjdk:8
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh wait-for-it
-RUN chmod +x wait-for-it
-EXPOSE 1111
+COPY --from=MAVEN_BUILD /target/*.jar /app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 9999

@@ -1,9 +1,7 @@
 package senghout.github.com.atomizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import senghout.github.com.atomizer.model.AddUrlInput;
 import senghout.github.com.atomizer.model.TinyUrl;
 import senghout.github.com.atomizer.model.Zoo;
@@ -27,6 +25,11 @@ public class AtomizerController {
         this.repo = repo;
         this.heimdall = heimdall;
         zoo = heimdall.getNextRange();
+    }
+
+    @GetMapping(value = "/skaffold")
+    public String getUrl() {
+        return "skaffold";
     }
 
     @GetMapping(value = "/find/{TinyUrl}")
