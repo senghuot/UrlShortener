@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: atomizer
+build:
+  artifacts:
+  - image: atomizer-image
+    jib: {}
+  local: {}
+
+# Using Jib instead of Docker to update the image for speed
+deploy:
+  kubectl:
+    manifests:
+    - atomizer.yaml

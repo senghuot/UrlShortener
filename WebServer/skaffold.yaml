@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: webserver
+build:
+  artifacts:
+  - image: webserver-image
+    jib: {}
+  local: {}
+
+deploy:
+  kubectl:
+    manifests:
+    - webserver.yaml

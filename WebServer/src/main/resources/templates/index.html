@@ -35,7 +35,7 @@
             });
 
             var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "http://localhost:9999/add", true /* async */);
+            xmlhttp.open("POST", "/add", true /* async */);
             xmlhttp.setRequestHeader("Content-type", "application/json");
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
@@ -59,7 +59,7 @@
         function createLinkElement(tinyUrl) {
             let linkElement = document.createElement("a");
             let link = "find/" + tinyUrl;
-            linkElement.innerHTML = "http://localhost:9999/" + link;
+            linkElement.innerHTML = "atom.co/" + tinyUrl;
             linkElement.href = link;
             return linkElement;
         }

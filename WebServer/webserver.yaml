@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+        - name: app
+          image: webserver-image
+          ports:
+            - containerPort: 9999
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webserver-service
+spec:
+  selector:
+    app: webserver
+  ports:
+    - port: 80
+      targetPort: 9999
+  type: LoadBalancer
