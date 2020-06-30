@@ -27,11 +27,6 @@ public class AtomizerController {
         zoo = heimdall.getNextRange();
     }
 
-    @GetMapping(value = "/skaffold")
-    public String getUrl() {
-        return "skaffold";
-    }
-
     @GetMapping(value = "/find/{TinyUrl}")
     public String getUrl(@PathVariable("TinyUrl")String tinyUrl) {
         TinyUrl url = repo.findByTinyUrl(tinyUrl);
