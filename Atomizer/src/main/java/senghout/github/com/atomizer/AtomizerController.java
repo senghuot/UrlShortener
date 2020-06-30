@@ -7,6 +7,8 @@ import senghout.github.com.atomizer.model.TinyUrl;
 import senghout.github.com.atomizer.model.Zoo;
 import senghout.github.com.atomizer.repo.TinyUrlRepo;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @RestController
 public class AtomizerController {
     private Zoo zoo;
@@ -20,11 +22,14 @@ public class AtomizerController {
     @Autowired
     AtomizerUtils atomizerUtils;
 
+    private int[] order;
+    private int index;
+
     public AtomizerController(AtomizerUtils atomizerUtils, TinyUrlRepo repo, Heimdall heimdall) {
         this.atomizerUtils = atomizerUtils;
         this.repo = repo;
         this.heimdall = heimdall;
-        zoo = heimdall.getNextRange();
+        setupNextRange();
     }
 
     @GetMapping(value = "/find/{TinyUrl}")
@@ -35,13 +40,38 @@ public class AtomizerController {
 
     @PostMapping(value = "/add", consumes = {"application/json"})
     public String addUrl(@RequestBody AddUrlInput data) {
-        if (zoo == null || zoo.low == zoo.high) {
-            zoo = heimdall.getNextRange();
+        if (zoo == null || this.index == zoo.high - zoo.low) {
+            setupNextRange();
         }
-        final String tinyUrl = atomizerUtils.encodeNumber(zoo.low++);
+        long nextValue = generateSeedUrlValue();
+        final String tinyUrl = atomizerUtils.encodeNumber(nextValue);
         final TinyUrl tiny = new TinyUrl(tinyUrl, data.fullUrl);
         repo.save(tiny);
 
         return tinyUrl;
+    }
+
+    private void setupNextRange() {
+        this.zoo = heimdall.getNextRange();
+        this.order = new int[(int)(zoo.high - zoo.low)];
+        for (int i = 0; i < order.length; i++) {
+            this.order[i] = i;
+        }
+        this.index = 0;
+    }
+
+    private long generateSeedUrlValue() {
+        int min = this.index++;
+
+        // Randomly selects an index from min (inclusive) to the max range (exclusive)
+        int nextIndex = ThreadLocalRandom.current().nextInt(min, (int) (this.zoo.high - this.zoo.low));
+
+        // Swaps the randomly selected index to be the min value which won't be used again
+        int temp = this.order[min];
+        this.order[min] = this.order[nextIndex];
+        this.order[nextIndex] = temp;
+
+        // Add our random value with the low range to generate a random seed to create a tiny url
+        return this.zoo.low + this.order[min];
     }
 }

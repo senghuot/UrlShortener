@@ -10,7 +10,6 @@
 
 	<modules>
 		<module>Atomizer</module>
-		<module>Registration</module>
 		<module>WebServer</module>
 	</modules>
 </project>
