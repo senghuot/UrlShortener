@@ -59,7 +59,7 @@
         function createLinkElement(tinyUrl) {
             let linkElement = document.createElement("a");
             let link = "find/" + tinyUrl;
-            linkElement.innerHTML = "atom.co/" + tinyUrl;
+            linkElement.innerHTML = document.location.href + link;
             linkElement.href = link;
             return linkElement;
         }
