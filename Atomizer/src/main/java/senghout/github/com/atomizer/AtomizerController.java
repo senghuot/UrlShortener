@@ -40,7 +40,7 @@ public class AtomizerController {
 
     @PostMapping(value = "/add", consumes = {"application/json"})
     public String addUrl(@RequestBody AddUrlInput data) {
-        if (zoo == null || this.index == zoo.high - zoo.low) {
+        if (zoo == null || this.index == order.length) {
             setupNextRange();
         }
         long nextValue = generateSeedUrlValue();
@@ -64,7 +64,7 @@ public class AtomizerController {
         int min = this.index++;
 
         // Randomly selects an index from min (inclusive) to the max range (exclusive)
-        int nextIndex = ThreadLocalRandom.current().nextInt(min, (int) (this.zoo.high - this.zoo.low));
+        int nextIndex = ThreadLocalRandom.current().nextInt(min, order.length);
 
         // Swaps the randomly selected index to be the min value which won't be used again
         int temp = this.order[min];
