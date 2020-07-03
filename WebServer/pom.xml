@@ -98,7 +98,7 @@
 				<version>2.4.0</version>
 				<configuration>
 					<to>
-						<image>webserver-image</image>
+						<image>scliregistry.azurecr.io/webserver-image</image>
 					</to>
 				</configuration>
 			</plugin>

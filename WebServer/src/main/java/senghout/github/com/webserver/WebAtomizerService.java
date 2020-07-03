@@ -26,6 +26,9 @@ public class WebAtomizerService {
     protected String serviceUrl;
 
     public String visitUrl(String tinyUrl) {
+        if (tinyUrl.equals("error")) {
+            return "/error";
+        }
         return restTemplate.getForObject(
                 serviceUrl + "/find/" + tinyUrl,
                 String.class

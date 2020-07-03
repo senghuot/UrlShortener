@@ -36,9 +36,4 @@ public class WebServerController {
         String res = atomizerService.addUrl(url.fullUrl);
         return res;
     }
-
-    @GetMapping("/index")
-    public String index(Model model) {
-        return "index";
-    }
 }

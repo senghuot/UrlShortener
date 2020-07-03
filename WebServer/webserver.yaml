@@ -14,10 +14,9 @@ spec:
     spec:
       containers:
         - name: app
-          image: webserver-image
+          image: scliregistry.azurecr.io/webserver-image
           ports:
             - containerPort: 9999
-          imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service

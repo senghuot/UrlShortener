@@ -35,7 +35,7 @@ public class AtomizerController {
     @GetMapping(value = "/find/{TinyUrl}")
     public String getUrl(@PathVariable("TinyUrl")String tinyUrl) {
         TinyUrl url = repo.findByTinyUrl(tinyUrl);
-        return url == null ? "Invalid input exception" : url.fullUrl;
+        return url == null ? "error" : url.fullUrl;
     }
 
     @PostMapping(value = "/add", consumes = {"application/json"})

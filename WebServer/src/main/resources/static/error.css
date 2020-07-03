@@ -1,0 +1,24 @@
+.container {
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.error-container {
+    text-align: left;
+    margin: 0 auto;
+    width: 50%;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 62px;
+    margin-bottom: 16px;
+}
+
+p {
+    font-size: 20px;
+    line-height: 28px;
+}
