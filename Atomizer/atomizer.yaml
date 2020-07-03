@@ -14,10 +14,9 @@ spec:
     spec:
       containers:
         - name: app
-          image: atomizer-image
+          image: scliregistry.azurecr.io/atomizer-image
           ports:
             - containerPort: 8888
-          imagePullPolicy: Never
 ---
 apiVersion: v1
 kind: Service

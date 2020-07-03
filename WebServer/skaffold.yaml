@@ -4,11 +4,23 @@ metadata:
   name: webserver
 build:
   artifacts:
-  - image: webserver-image
+  - image: scliregistry.azurecr.io/webserver-image
     jib: {}
-  local: {}
 
+# Using Jib instead of Docker to update the image for speed
 deploy:
   kubectl:
     manifests:
     - webserver.yaml
+
+# Defines profile environments such DEV, PROD
+profiles:
+  - name: dev
+    deploy:
+      kubeContext: minikube
+    activation:
+      - command: dev
+
+  - name: ghost
+    deploy:
+      kubeContext: sclicluster

@@ -4,12 +4,23 @@ metadata:
   name: atomizer
 build:
   artifacts:
-  - image: atomizer-image
+  - image: scliregistry.azurecr.io/atomizer-image
     jib: {}
-  local: {}
 
 # Using Jib instead of Docker to update the image for speed
 deploy:
   kubectl:
     manifests:
     - atomizer.yaml
+
+# Defines profile environments such DEV, PROD
+profiles:
+  - name: dev
+    deploy:
+      kubeContext: minikube
+    activation:
+        - command: dev
+
+  - name: ghost
+    deploy:
+      kubeContext: sclicluster
